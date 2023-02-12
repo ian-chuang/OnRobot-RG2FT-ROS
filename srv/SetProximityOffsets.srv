@@ -1,0 +1,9 @@
+# This field sets the offset of the left proximity sensor that is subtracted from the raw signal. 
+# It must be provided in 1/10 millimeters. 
+int16 ProximityOffsetL 
+
+# Same as the left above.
+int16 ProximityOffsetR
+---
+bool success
+string message
