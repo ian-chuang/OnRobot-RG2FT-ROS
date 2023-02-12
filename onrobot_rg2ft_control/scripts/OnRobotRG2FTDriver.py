@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import rospy
-from onrobot_rg2ft_ros.OnRobotRG2FT import OnRobotRG2FT
+from onrobot_rg2ft_control.OnRobotRG2FT import OnRobotRG2FT
 from std_srvs.srv import Trigger, TriggerResponse, SetBool, SetBoolResponse
 from onrobot_rg2ft_ros.srv import SetProximityOffsets, SetProximityOffsetsResponse
 from onrobot_rg2ft_ros.msg import RG2FTCommand, RG2FTState

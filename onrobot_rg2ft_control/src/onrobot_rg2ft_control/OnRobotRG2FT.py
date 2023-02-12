@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 import rospy
-from onrobot_rg2ft_ros.OnRobotTcpClient import OnRobotTcpClient
-from onrobot_rg2ft_ros.msg import RG2FTCommand, RG2FTState
-from onrobot_rg2ft_ros.srv import SetProximityOffsetsRequest
+from onrobot_rg2ft_control.OnRobotTcpClient import OnRobotTcpClient
+from onrobot_rg2ft_msgs.msg import RG2FTCommand, RG2FTState
+from onrobot_rg2ft_msgs.srv import SetProximityOffsetsRequest
 
 RG2FT_MIN_WIDTH = 0
 RG2FT_MAX_WIDTH = 1000

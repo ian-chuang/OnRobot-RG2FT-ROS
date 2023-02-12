@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>onrobot_rg2ft_ros</name>
+  <name>onrobot_rg2ft_control</name>
   <version>1.0.0</version>
   <description>Package to control an OnRobot RG2-FT gripper</description>
   <maintainer email="itchuang@ucdavis.edu">Ian Chuang</maintainer>
@@ -9,6 +9,6 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <depend>rospy</depend>
-  <build_depend>message_generation</build_depend>
-  <exec_depend>message_runtime</exec_depend>
+  <depend>onrobot_rg2ft_msgs</depend>
+  <depend>std_srvs</depend>
 </package>
