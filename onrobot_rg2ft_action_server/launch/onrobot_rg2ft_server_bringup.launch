@@ -1,31 +1,26 @@
 <!-- Launch file for Segway platform startup -->
 
 <launch>
-    <arg name="GripperID" default="1"/>
-    <arg name="GripperModel" default="AG95_MB"/>
-    <arg name="Connectport" default="/dev/ttyUSB0"/>
-    <arg name="Baudrate" default="115200"/>
+    <arg name="ip" default="192.168.1.1" />
+    <arg name="port" default="502" />
+    <arg name="gripper_name" default="onrobot_rg2ft" />
 
-
-    <node pkg="dh_gripper_driver" type="dh_gripper_driver" name="dh_gripper_driver" respawn="true" output="screen">
-        <param name="Gripper_ID" type="string" value="$(arg GripperID)" />
-        <param name="Gripper_Model" type="string" value="$(arg GripperModel)" />
-        <param name="Connect_port" type="string" value="$(arg Connectport)" />
-        <param name="BaudRate"  type="string" value="$(arg Baudrate)" />
+    <node pkg="onrobot_rg2ft_control" type="OnRobotRG2FTDriver.py" name="onrobot_rg2ft_driver" output="screen" ns="$(arg gripper_name)">
+        <param name="ip"               value="$(arg ip)" />
+        <param name="port"             value="$(arg port)" />
     </node>
 
-    <node pkg="dh_gripper_action_server" type="dh_gripper_action_server" name="dh_gripper_action_server" output="screen">
+    <node pkg="onrobot_rg2ft_action_server" type="onrobot_rg2ft_action_server" name="onrobot_rg2ft_action_server" output="screen">
         <param name="min_angle" type="double" value="0.0" />
-        <param name="max_angle" type="double" value="0.93" />
-        <param name="min_effort" type="double" value="20.0" />
-        <param name="max_effort" type="double" value="100.0" />
-        <param name="default_effort" type="double" value="100.0" />
-        <param name="speed" type="double" value="100.0" />
+        <param name="max_angle" type="double" value="1.0" />
+        <param name="min_effort" type="double" value="0.0" />
+        <param name="max_effort" type="double" value="400.0" />
+        <param name="default_effort" type="double" value="400.0" />
         <param name="action_server_name" type="str" value="gripper_controller/gripper_cmd" />
-        <param name="control_topic" type="str" value="gripper/ctrl" />
-        <param name="state_topic" type="str" value="gripper/states" />
+        <param name="control_topic" type="str" value="$(arg gripper_name)/command" />
+        <param name="state_topic" type="str" value="$(arg gripper_name)/state" />
         <param name="joint_states_topic" type="str" value="joint_states" />
-        <param name="joint_name" type="str" value="left_outer_knuckle_joint" />
+        <param name="joint_name" type="str" value="left_finger" />
     </node>
 
 </launch>

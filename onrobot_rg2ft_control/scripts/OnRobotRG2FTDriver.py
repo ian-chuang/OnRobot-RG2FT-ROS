@@ -3,8 +3,8 @@
 import rospy
 from onrobot_rg2ft_control.OnRobotRG2FT import OnRobotRG2FT
 from std_srvs.srv import Trigger, TriggerResponse, SetBool, SetBoolResponse
-from onrobot_rg2ft_ros.srv import SetProximityOffsets, SetProximityOffsetsResponse
-from onrobot_rg2ft_ros.msg import RG2FTCommand, RG2FTState
+from onrobot_rg2ft_msgs.srv import SetProximityOffsets, SetProximityOffsetsResponse
+from onrobot_rg2ft_msgs.msg import RG2FTCommand, RG2FTState
 
 class OnRobotRG2FTDriver:
 
@@ -25,7 +25,7 @@ class OnRobotRG2FTDriver:
         while not rospy.is_shutdown():
             # Getting and publish the Gripper status
             state = self.gripper.readState()
-            self.pub.publish(state)
+            self.state_pub.publish(state)
             rate.sleep()
 
     def restart_cb(self, req):
@@ -40,12 +40,12 @@ class OnRobotRG2FTDriver:
         return SetBoolResponse(success=None, message=None)  # TODO: implement
 
     def prox_offsets_cb(self, req):
-        rospy.loginfo("Restarting the power cycle of all grippers connected.")
+        rospy.loginfo("Setting proximity offsets.")
         self.gripper.setProximityOffsets(req.ProximityOffsetL, req.ProximityOffsetR)
         return SetProximityOffsetsResponse(success=None, message=None)  # TODO: implement
 
 if __name__ == '__main__':
-    rospy.init_node('onrobot_rg2ft_driver', anonymous=True, log_level=rospy.DEBUG)
+    rospy.init_node('onrobot_rg2ft_driver', anonymous=True)
 
     ip = rospy.get_param('~ip', '192.168.1.1')
     port = rospy.get_param('~port', '502')

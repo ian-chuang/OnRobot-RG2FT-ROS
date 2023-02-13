@@ -53,6 +53,14 @@ void OnRobotRG2FTActionServer::goalCB()
 void OnRobotRG2FTActionServer::preemptCB()
 {
   ROS_INFO("%s: Preempted", action_name_.c_str());
+
+  // send stop command
+  // GripperCtrl ctrl_msg;
+  // ctrl_msg.TargetWidth = 0;
+  // ctrl_msg.TargetForce = 0;
+  // ctrl_msg.Control = 0;
+  // goal_pub_.publish(ctrl_msg);
+
   as_.setPreempted();
 }
 
@@ -62,7 +70,10 @@ void OnRobotRG2FTActionServer::stateCB(const GripperState::ConstPtr& msg)
 
   if (!as_.isActive()) return;
 
-  if (msg->ActualGripperWidth == position_goal && msg->GripperBusy == 0)
+  if (
+    msg->ActualGripperWidth > position_goal - GOAL_TOLERANCE &&
+    msg->ActualGripperWidth < position_goal + GOAL_TOLERANCE && 
+    msg->GripperBusy == 0)
   {
     ROS_INFO("%s succeeded (reached target position)", action_name_.c_str());
     GripperCommandResult result;
@@ -116,7 +127,7 @@ GripperCtrl OnRobotRG2FTActionServer::goalToGripperCtrl(GripperCommandGoal goal)
     gripper_params_.max_angle_,
     MIN_POSITION,
     MAX_POSITION,
-    true
+    false
   );
 
   GripperCtrl ctrl_msg;
@@ -134,7 +145,7 @@ void OnRobotRG2FTActionServer::publishJointStates(const GripperState::ConstPtr& 
     MAX_POSITION,
     gripper_params_.min_angle_,
     gripper_params_.max_angle_,
-    true
+    false
   );
 
   sensor_msgs::JointState msg;

@@ -3,7 +3,7 @@
     <arg name="port" default="502" />
 
     <node name="onrobot_rg2ft_driver"
-        pkg="onrobot_rg2ft_ros"
+        pkg="onrobot_rg2ft_control"
         type="OnRobotRG2FTDriver.py"
         output="screen">
 

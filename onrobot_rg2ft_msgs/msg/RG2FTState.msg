@@ -16,6 +16,6 @@ uint8 ProximityStatusL # Reads low (0x0000) when there is no error with the left
 int16 ProximityValueL # Reads the current distance from the left proximity sensor in 1/10 mm.
 uint8 ProximityStatusR # Same as the left above.
 int16 ProximityValueR # Same as the left above.
-uint16 ActualGripperWidth # Indicates the current width between the gripper fingers in 1/10 millimeters.
+int16 ActualGripperWidth # Indicates the current width between the gripper fingers in 1/10 millimeters.
 uint8 GripperBusy # High (1) when a motion is ongoing, low (0) when not. The gripper will only accept new commands when this flag is low.
 uint8 GripDetected # High (1) when an internal or external grip is detected.
