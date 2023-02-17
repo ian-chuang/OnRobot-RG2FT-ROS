@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot name="onrobot_rg2ft" xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- import main macro -->
+  <xacro:include filename="$(find onrobot_rg2ft_description)/urdf/onrobot_rg2ft_macro.xacro" />
+
+  <!-- parameters -->
+  <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface" />
+
+  <!-- gripper -->
+  <xacro:onrobot_rg2ft
+    prefix=""
+    hw_interface="$(arg transmission_hw_interface)"
+    parent="world"
+  >
+    <origin xyz="0 0 0.1" rpy="0 0 0" />
+  </xacro:onrobot_rg2ft>
+
+
+  <link name="world" />
+
+
+  <gazebo>
+    <plugin name="ros_control" filename="libgazebo_ros_control.so"></plugin>
+  </gazebo>
+</robot>

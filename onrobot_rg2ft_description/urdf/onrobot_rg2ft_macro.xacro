@@ -1,0 +1,318 @@
+<?xml version="1.0"?>
+<robot name="onrobot_rg2ft" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find onrobot_rg2ft_description)/urdf/onrobot_rg2ft_transmission.xacro" />
+  <xacro:include filename="$(find onrobot_rg2ft_description)/urdf/onrobot_rg2ft_gazebo.xacro" />
+
+  <xacro:macro name="onrobot_rg2ft"
+    params="
+    prefix 
+    parent
+    hw_interface
+    *origin"
+  >
+
+    <xacro:onrobot_rg2ft_transmission prefix="${prefix}" hw_interface="${hw_interface}" />
+    <xacro:onrobot_rg2ft_gazebo prefix="${prefix}" />
+
+    <xacro:property name="lower_limit" value="0" />
+    <xacro:property name="upper_limit" value="1.18" />
+    <xacro:property name="max_effort" value="50.0" />
+    <xacro:property name="max_velocity" value="2.0" />
+
+    <material name="silver">
+      <color rgba="0.700 0.700 0.700 1.000" />
+    </material>
+    <material name="blue">
+      <color rgba="${55/255} ${151/255} ${207/255} 1.000" />
+    </material>
+
+
+    <link name="${prefix}quick_changer">
+      <inertial>
+        <origin xyz="0.0014673787228634701 -0.0007395056519161622 0.00391087859435364" rpy="0 0 0" />
+        <mass value="0.05802030412577654" />
+        <inertia ixx="2e-05" iyy="2.7e-05" izz="4.5e-05" ixy="-0.0" iyz="0.0" ixz="-0.0" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/visual/quick_changer.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="blue" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/collision/quick_changer.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}gripper_body">
+      <inertial>
+        <origin xyz="0.0272971231150397 -0.002438088956580745 0.035297715994502724" rpy="0 0 0" />
+        <mass value="0.5707794664902835" />
+        <inertia ixx="0.000622" iyy="0.000662" izz="0.000226" ixy="3e-06" iyz="1.8e-05" ixz="0.0" />
+      </inertial>
+      <visual>
+        <origin xyz="0.02705 -0.0 -0.047" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/visual/gripper_body.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="silver" />
+      </visual>
+      <collision>
+        <origin xyz="0.02705 -0.0 -0.047" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/collision/gripper_body.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}angle_bracket">
+      <inertial>
+        <origin xyz="-0.00023577776357350244 0.0006406606087327927 0.01993861451986476" rpy="0 0 0" />
+        <mass value="0.19757034519537245" />
+        <inertia ixx="9.8e-05" iyy="0.000145" izz="0.000155" ixy="-0.0" iyz="2e-06" ixz="-1e-06" />
+      </inertial>
+      <visual>
+        <origin xyz="-0.0 -0.0 -0.00255" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/visual/angle_bracket.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="silver" />
+      </visual>
+      <collision>
+        <origin xyz="-0.0 -0.0 -0.00255" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/collision/angle_bracket.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}left_inner_knuckle">
+      <inertial>
+        <origin xyz="0.01762916513992015 0.010471874847992522 0.017068183318320468" rpy="0 0 0" />
+        <mass value="0.024337519273275633" />
+        <inertia ixx="5e-06" iyy="7e-06" izz="5e-06" ixy="-0.0" iyz="-0.0" ixz="-3e-06" />
+      </inertial>
+      <visual>
+        <origin xyz="-0.0075 0.009367 -0.139397" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/visual/left_inner_knuckle.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="silver" />
+      </visual>
+      <collision>
+        <origin xyz="-0.0075 0.009367 -0.139397" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/collision/left_inner_knuckle.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}right_outer_knuckle">
+      <inertial>
+        <origin xyz="-0.012312223780380358 0.010369678145266329 0.010203759185649544" rpy="0 0 0" />
+        <mass value="0.041583686281793396" />
+        <inertia ixx="1e-05" iyy="1.6e-05" izz="1e-05" ixy="0.0" iyz="-0.0" ixz="7e-06" />
+      </inertial>
+      <visual>
+        <origin xyz="0.017 0.009534 -0.122898" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/visual/right_outer_knuckle.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="silver" />
+      </visual>
+      <collision>
+        <origin xyz="0.017 0.009534 -0.122898" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/collision/right_outer_knuckle.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}left_outer_knuckle">
+      <inertial>
+        <origin xyz="0.01231204747983699 0.010369678145260136 0.01020375918419171" rpy="0 0 0" />
+        <mass value="0.04158368628179342" />
+        <inertia ixx="1e-05" iyy="1.6e-05" izz="1e-05" ixy="-0.0" iyz="-0.0" ixz="-7e-06" />
+      </inertial>
+      <visual>
+        <origin xyz="-0.017 0.009534 -0.122898" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/visual/left_outer_knuckle.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="silver" />
+      </visual>
+      <collision>
+        <origin xyz="-0.017 0.009534 -0.122898" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/collision/left_outer_knuckle.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}left_inner_finger">
+      <inertial>
+        <origin xyz="-0.009341477027312806 0.006108535220686467 0.03133683897712786" rpy="0 0 0" />
+        <mass value="0.03203868115594587" />
+        <inertia ixx="9e-06" iyy="9e-06" izz="2e-06" ixy="0.0" iyz="-0.0" ixz="2e-06" />
+      </inertial>
+      <visual>
+        <origin xyz="-0.056748 0.00475 -0.160866" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/visual/left_inner_finger.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="silver" />
+      </visual>
+      <collision>
+        <origin xyz="-0.056748 0.00475 -0.160866" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/collision/left_inner_finger.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}right_inner_finger">
+      <inertial>
+        <origin xyz="0.009341300963273541 0.006108535097342211 0.03133683984830843" rpy="0 0 0" />
+        <mass value="0.032038680057528524" />
+        <inertia ixx="9e-06" iyy="9e-06" izz="2e-06" ixy="-0.0" iyz="-0.0" ixz="-2e-06" />
+      </inertial>
+      <visual>
+        <origin xyz="0.056748 0.00475 -0.160866" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/visual/right_inner_finger.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="silver" />
+      </visual>
+      <collision>
+        <origin xyz="0.056748 0.00475 -0.160866" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/collision/right_inner_finger.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}right_inner_knuckle">
+      <inertial>
+        <origin xyz="-0.017629341439301484 0.010471874848001397 0.017068183319570135" rpy="0 0 0" />
+        <mass value="0.024337519273275623" />
+        <inertia ixx="5e-06" iyy="7e-06" izz="5e-06" ixy="0.0" iyz="-0.0" ixz="3e-06" />
+      </inertial>
+      <visual>
+        <origin xyz="0.0075 0.009367 -0.139397" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/visual/right_inner_knuckle.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="silver" />
+      </visual>
+      <collision>
+        <origin xyz="0.0075 0.009367 -0.139397" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://onrobot_rg2ft_description/meshes/collision/right_inner_knuckle.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}quick_changer_joint" type="fixed">
+      <parent link="${parent}" />
+      <child link="${prefix}quick_changer" />
+      <xacro:insert_block name="origin" />
+    </joint>
+
+    <joint name="${prefix}gripper_body_joint" type="fixed">
+      <origin xyz="-0.02705 0.0 0.04445" rpy="${.58 * pi/180} 0 0" />
+      <parent link="${prefix}angle_bracket" />
+      <child link="${prefix}gripper_body" />
+    </joint>
+
+    <joint name="${prefix}angle_bracket_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.00255" rpy="0 0 0" />
+      <parent link="${prefix}quick_changer" />
+      <child link="${prefix}angle_bracket" />
+    </joint>
+
+    <joint name="${prefix}left_inner_knuckle_joint" type="revolute">
+      <origin xyz="0.03455 -0.009367 0.092397" rpy="0 ${23.8 *pi/180} 0" />
+      <parent link="${prefix}gripper_body" />
+      <child link="${prefix}left_inner_knuckle" />
+      <axis xyz="-0.0 0.999949 -0.010122" />
+      <limit upper="${-(lower_limit-0.01)}" lower="${-(upper_limit+0.01)}" velocity="${max_velocity}"
+        effort="${max_effort}" />
+      <mimic joint="${prefix}finger_joint" multiplier="-1" offset="0" />
+    </joint>
+
+    <joint name="${prefix}finger_joint" type="revolute">
+      <origin xyz="0.01005 -0.009534 0.075898" rpy="0 ${-23.8 *pi/180} 0" />
+      <parent link="${prefix}gripper_body" />
+      <child link="${prefix}right_outer_knuckle" />
+      <axis xyz="-0.0 0.999949 -0.010122" />
+      <limit lower="${lower_limit}" upper="${upper_limit}" velocity="${max_velocity}"
+        effort="${max_effort}" />
+    </joint>
+
+    <joint name="${prefix}left_outer_knuckle_joint" type="revolute">
+      <origin xyz="0.04405 -0.009534 0.075898" rpy="0 ${23.8 *pi/180} 0" />
+      <parent link="${prefix}gripper_body" />
+      <child link="${prefix}left_outer_knuckle" />
+      <axis xyz="-0.0 0.999949 -0.010122" />
+      <limit upper="${-(lower_limit-0.01)}" lower="${-(upper_limit+0.01)}" velocity="${max_velocity}"
+        effort="${max_effort}" />
+      <mimic joint="${prefix}finger_joint" multiplier="-1" offset="0" />
+    </joint>
+
+    <joint name="${prefix}left_inner_finger_joint" type="revolute">
+      <origin xyz="0.039748 0.004784 0.037968" rpy="0 ${-23.8 *pi/180} 0" />
+      <parent link="${prefix}left_outer_knuckle" />
+      <child link="${prefix}left_inner_finger" />
+      <axis xyz="0.0 -0.999949 0.010122" />
+      <limit upper="${-(lower_limit-0.01)}" lower="${-(upper_limit+0.01)}" velocity="${max_velocity}"
+        effort="${max_effort}" />
+      <mimic joint="${prefix}finger_joint" multiplier="-1" offset="0" />
+    </joint>
+
+    <joint name="${prefix}right_inner_finger_joint" type="revolute">
+      <origin xyz="-0.039748 0.004784 0.037968" rpy="0 ${23.8 *pi/180} 0" />
+      <parent link="${prefix}right_outer_knuckle" />
+      <child link="${prefix}right_inner_finger" />
+      <axis xyz="0.0 0.999949 -0.010122" />
+      <limit upper="${-(lower_limit-0.01)}" lower="${-(upper_limit+0.01)}" velocity="${max_velocity}"
+        effort="${max_effort}" />
+      <mimic joint="${prefix}finger_joint" multiplier="-1" offset="0" />
+    </joint>
+
+    <joint name="${prefix}right_inner_knuckle_joint" type="revolute">
+      <origin xyz="0.01955 -0.009367 0.092397" rpy="0 ${-23.8 *pi/180} 0" />
+      <parent link="${prefix}gripper_body" />
+      <child link="${prefix}right_inner_knuckle" />
+      <axis xyz="-0.0 0.999949 -0.010122" />
+      <limit lower="${lower_limit-0.01}" upper="${upper_limit+0.01}" velocity="${max_velocity}"
+        effort="${max_effort}" />
+      <mimic joint="${prefix}finger_joint" multiplier="1" offset="0" />
+    </joint>
+
+
+  </xacro:macro>
+
+</robot>
