@@ -19,7 +19,6 @@ int main(int argc, char** argv)
   private_nh.param<double>("min_effort", cparams.min_effort_, 20);
   private_nh.param<double>("max_effort", cparams.max_effort_, 100);
   private_nh.param<double>("default_effort", cparams.default_effort_, 100);
-  private_nh.param<double>("speed", cparams.speed_, 100);
   private_nh.param<std::string>("control_topic", cparams.control_topic_, "gripper/ctrl");
   private_nh.param<std::string>("state_topic", cparams.state_topic_, "gripper/states");
   private_nh.param<std::string>("joint_states_topic", cparams.joint_states_topic_, "joint_states");

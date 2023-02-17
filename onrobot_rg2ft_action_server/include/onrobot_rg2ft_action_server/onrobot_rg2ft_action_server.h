@@ -26,6 +26,7 @@ namespace onrobot_rg2ft_action_server
 #define MAX_POSITION 1000
 #define MIN_FORCE 0
 #define MAX_FORCE 400
+#define GOAL_TOLERANCE 20
 
 typedef onrobot_rg2ft_msgs::RG2FTCommand GripperCtrl;
 typedef onrobot_rg2ft_msgs::RG2FTState GripperState;
@@ -51,7 +52,6 @@ struct GripperParams
   double min_effort_; // N / (Nm) ???
   double max_effort_;
   double default_effort_;
-  double speed_;
   std::string control_topic_;
   std::string state_topic_;
   std::string joint_states_topic_;
