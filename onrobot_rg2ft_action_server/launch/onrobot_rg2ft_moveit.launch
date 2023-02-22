@@ -1,0 +1,24 @@
+<launch>
+    <arg name="ip" default="192.168.1.1" />
+    <arg name="port" default="502" />
+    <arg name="gripper_name" default="onrobot_rg2ft" />
+
+    <node pkg="onrobot_rg2ft_control" type="OnRobotRG2FTDriver.py" name="onrobot_rg2ft_driver"
+        output="screen" ns="$(arg gripper_name)">
+        <param name="ip" value="$(arg ip)" />
+        <param name="port" value="$(arg port)" />
+    </node>
+
+    <include file="$(find onrobot_rg2ft_action_server)/launch/onrobot_rg2ft_action_server.launch">
+        <arg name="ip" default="$(arg ip)" />
+        <arg name="port" default="$(arg port)" />
+        <arg name="gripper_name" default="$(arg gripper_name)" />
+    </include>
+
+    <include file="$(find onrobot_rg2ft_moveit_config)/launch/demo.launch">
+        <arg name="load_robot_description" value="true" />
+        <arg name="moveit_controller_manager" value="simple" />
+        <arg name="use_rviz" value="true" />
+    </include>
+
+</launch>

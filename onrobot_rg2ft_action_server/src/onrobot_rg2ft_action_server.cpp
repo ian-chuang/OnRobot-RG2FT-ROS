@@ -127,7 +127,7 @@ GripperCtrl OnRobotRG2FTActionServer::goalToGripperCtrl(GripperCommandGoal goal)
     gripper_params_.max_angle_,
     MIN_POSITION,
     MAX_POSITION,
-    false
+    true
   );
 
   GripperCtrl ctrl_msg;
@@ -145,7 +145,7 @@ void OnRobotRG2FTActionServer::publishJointStates(const GripperState::ConstPtr& 
     MAX_POSITION,
     gripper_params_.min_angle_,
     gripper_params_.max_angle_,
-    false
+    true
   );
 
   sensor_msgs::JointState msg;
