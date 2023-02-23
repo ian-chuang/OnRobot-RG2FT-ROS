@@ -3,6 +3,12 @@
     <arg name="port" default="502" />
     <arg name="gripper_name" default="onrobot_rg2ft" />
 
+    <node pkg="onrobot_rg2ft_control" type="OnRobotRG2FTDriver.py" name="onrobot_rg2ft_driver"
+        output="screen" ns="$(arg gripper_name)">
+        <param name="ip" value="$(arg ip)" />
+        <param name="port" value="$(arg port)" />
+    </node>
+
     <node pkg="onrobot_rg2ft_action_server" type="onrobot_rg2ft_action_server" name="onrobot_rg2ft_action_server" output="screen">
         <param name="min_angle" type="double" value="0.0" />
         <param name="max_angle" type="double" value="1.18" />
