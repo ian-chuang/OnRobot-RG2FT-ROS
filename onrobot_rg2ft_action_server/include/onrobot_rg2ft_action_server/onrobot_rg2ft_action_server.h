@@ -24,7 +24,7 @@ namespace onrobot_rg2ft_action_server
 // DH gripper control parameters
 #define MIN_POSITION 0
 #define MAX_POSITION 1000
-#define MIN_FORCE 0
+#define MIN_FORCE 30
 #define MAX_FORCE 400
 #define GOAL_TOLERANCE 20
 

@@ -130,9 +130,18 @@ GripperCtrl OnRobotRG2FTActionServer::goalToGripperCtrl(GripperCommandGoal goal)
     true
   );
 
+  double gripper_ctrl_effort = mapRange(
+    max_effort,
+    gripper_params_.min_effort_,
+    gripper_params_.max_effort_,
+    MIN_FORCE,
+    MAX_FORCE,
+    false
+  );
+
   GripperCtrl ctrl_msg;
   ctrl_msg.TargetWidth = gripper_ctrl_position;
-  ctrl_msg.TargetForce = max_effort;
+  ctrl_msg.TargetForce = gripper_ctrl_effort;
   ctrl_msg.Control = 1;
 
   return ctrl_msg;
