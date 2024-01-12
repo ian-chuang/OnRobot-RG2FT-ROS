@@ -1,5 +1,5 @@
 controller_list:
-- name: gripper_action_controller
+- name: gripper_controller
   action_ns: gripper_cmd
   default: True
   type: GripperCommand
